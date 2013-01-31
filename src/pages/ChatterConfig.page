@@ -1,0 +1,84 @@
+<!--
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<apex:page controller="ChatterConfigController" docType="html-5.0" standardStylesheets="true" sidebar="false" showHeader="true">
+<h1>Configure Chatter app</h1>
+
+<apex:form >
+<apex:outputPanel rendered="{!NOT(configComplete)}" >
+<p> It appears that your chatter app is not configured for use.  This page would help you configure the app so you can start using it right away.</p>
+
+<p> There are 2 steps involved in configuring the custom chatter app.</p>
+<h2> 1) Configure your navigation elements.</h2>
+<p> Chatter app UI includes a top navigation bar and a side navigation bar.  Items for top and side navigation are configured in a custom setting (NavigationElement__c).</p>
+
+<p>This page allows you to automatically configure a default navigation that includes all pages in this app. You can always change it later in the backend by directly editing the custom setting.</p>
+
+<p> Navigation elements added by default configuration:
+<ul>
+    <li> Top navigation bar items
+        <ul>
+        <li>Home (points to org home page) </li>
+        <li>Chatter (custom chatter UI) </li>
+        </ul>
+    </li>
+    <li> Side navigation bar items   for Chatter
+        <ul>
+        <li>My chatter feed</li>
+        <li>@Me feed</li>
+        <li>All Chatter</li>
+        <li>Groups</li>
+        <li>People</li>
+        <li>Object feed</li>
+        <li>Files</li>
+        </ul>
+    </li>
+</ul>
+</p>
+
+
+
+<p> </p>
+<h2> 2) Configure the custom object used for object feed.</h2>
+<p> Optionally, enter the API name of the object whose feed should show up in the chatter app for "object feed" menu item.  Please leave it blank if you don't need this.</p>  
+
+<p>You can always change it later on by editing the custom setting called CustomChatterConfig and adding or editing a record with the name as "feedObjectApiName". The value would be the API name of the object.</p>
+    Object API name (optional):&nbsp;&nbsp;<apex:inputText value="{!feedObjectApiName}" />
+    <br /><br /><br />
+    <apex:commandButton action="{!configureApp}" value="Configure" />
+</apex:outputPanel>
+
+
+<apex:outputPanel rendered="{!configComplete}" >
+<h2> Congratulations! Your app has been configured successfully</h2>
+<p> <a href="/apex/Chatter">Take me to the app</a></p>
+</apex:outputPanel>
+
+</apex:form>
+
+
+</apex:page>

@@ -1,0 +1,208 @@
+<!--
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<apex:page docType="html-5.0" showHeader="false" standardStylesheets="false" controller="TemplateController" cache="true" sidebar="false">
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8" />
+
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome cFrame
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+
+    <title><apex:insert name="pageTitle" /></title>
+
+    <meta name="Description"  content="" />
+    <meta name="Keywords" content="crm, salesforce crm" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Home screen icon  Mathias Bynens mathiasbynens.be/notes/touch-icons -->
+    <!-- For iPhone 4 with high-resolution Retina display: -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/h/apple-touch-icon.png">  -->
+    <!-- For first-generation iPad: -->
+    <!-- <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/m/apple-touch-icon.png">  -->
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- <link rel="apple-touch-icon-precomposed" href="img/l/apple-touch-icon-precomposed.png">  -->
+    <!-- For nokia devices: -->
+    <!-- <link rel="shortcut icon" href="img/l/apple-touch-icon.png">  -->
+
+    <!-- <link rel="shortcut icon" href="/favicon.ico"> -->
+
+
+    <!-- <link type="text/css" rel="stylesheet" href="https://www.salesforce.com/common/assets/css/external-components-min.css" class="user" /> -->
+    <!-- <link rel="stylesheet" type="text/css" href="{!$Resource.GlobalCSS}"/> -->
+
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_reset)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_grids)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_layout)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_dialog)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_buttons)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_lists)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_forms)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_widgets)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_helpers)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_backgroundsShared)}"/>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_themes_default)}"/>
+
+    <!-- Add extra CSS to head from a child page -->
+    <apex:insert name="cssHeadSection" />
+
+    <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_mediaQuery)}"/> <!-- This has to come last in stylesheets -->
+
+    <!--[if IE 6]>
+       <script>document.documentElement.className += ' ie6';</script>
+    <![endif]-->
+
+    <!--[if IE 7]>
+       <script>document.documentElement.className += ' ie7';</script>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+       <script>document.documentElement.className += ' ieLt8';</script>
+    <![endif]-->
+
+    <!--[if IE 8]>
+       <script>document.documentElement.className += ' ie8';</script>
+    <![endif]-->
+
+    <!--[if IE 9]>
+       <script>document.documentElement.className += ' ie9';</script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+       <script>document.documentElement.className += ' ieLt9';</script>
+    <![endif]-->
+
+    <!--[if gt IE 9]>
+       <script>document.documentElement.className += ' ieGt9';</script>
+    <![endif]-->
+
+    <!--[if IE]>
+       <script>document.documentElement.className += ' ie';</script>
+    <![endif]-->
+
+    <!--[if IEMobile]>
+       <script>document.documentElement.className += ' ieMobile';</script>
+    <![endif]-->
+
+    <!--[if !IE]><!-->
+       <script>document.documentElement.className += ' no-ie';</script>
+    <!--<![endif]-->
+
+    <!--[if lte IE 8]>
+        <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_ie)}" />
+    <![endif]-->
+
+
+    <script>
+        // App namespace
+        window.$Cloud = {};
+
+        $Cloud.GlobalConfig = $Cloud.GC = {
+            // Static Resource URLs
+            urls: {
+                base: "{! URLFOR($Resource.prod_js_base_min)}",
+                extras: "{! URLFOR($Resource.prod_js_extras_min)}",
+                app: "{! URLFOR($Resource.js_app_app)}",
+                moment: "{! URLFOR($Resource.js_libs_momentLangAll_min)}"
+            },
+            themes: {
+                name: "default",
+                overlayColor: "#000",
+                overlayOpacity: 0.5
+            },
+            labels: {
+                genericRequestFailure:  "{!$Label.ERROR_generic_request_failure}",
+                btnClose:               "{!$Label.close}",
+                btnCancel:              "{!$Label.button_cancel}",
+                modalInfoHeading:       "{!$Label.modal_info_heading}",
+                pullToRefresh:          "{!$Label.pull_to_refresh_text}",
+                pullToRefreshLoading:   "{!$Label.pull_to_refresh_loading_text}",
+                releaseToRefresh:       "{!$Label.pull_to_refresh_release_text}"
+            },
+            defaultLang: 'en-us'
+        }
+    </script>
+
+    <script src="{! URLFOR($Resource.prod_js_base_min)}"></script>
+
+        <script src="{! URLFOR($Resource.js_libs_modernizrCustom_min)}"></script>
+        <script src="{! URLFOR($Resource.js_plugins_jqueryToolsMin)}"></script>
+        <script src="{! URLFOR($Resource.js_plugins_jquerySimpleModalMin)}"></script>
+        <script src="{! URLFOR($Resource.js_libs_iscroll_min)}"></script>
+        <script src="{! URLFOR($Resource.js_plugins_jqueryScrollTo_min)}"></script>
+        <script src="{! URLFOR($Resource.js_plugins_jqueryTransitCustom_min)}"></script>
+
+    <apex:outputPanel rendered="{!isUsingIosPhonegap}">
+        <script src="{! URLFOR($Resource.js_libs_phonegap_ios)}"></script>
+    </apex:outputPanel>
+    <apex:outputPanel rendered="{!isUsingAndroidPhonegap}">
+        <script src="{! URLFOR($Resource.js_libs_phonegap_android)}"></script>
+    </apex:outputPanel>
+
+    <!-- Use for additional JS libraries (not app JS, that goes in Footer),
+        etc. Put extra CSS in cssHeadSection above so it comes before JS -->
+    <apex:insert name="headSection" />
+</head>
+<body role="application">
+    <!-- Load the main page overlay mask -->
+    <!-- <apex:include pageName="DialogPageMaskFrag" /> -->
+
+    <input type="hidden" id="STATIC_RES_JQUERY" value="{!$Resource.js_libs_jquery}" />
+    <div class="pageWrapper">
+        <apex:composition template="Header"></apex:composition>
+
+        <!-- <script type="text/javascript" src="{!$Resource.GlobalJS}"></script> -->
+
+        <apex:composition template="Wrapper"></apex:composition>
+
+
+
+    </div>
+    <!-- Full app mask for blocking the whole UI (form submits, etc.) -->
+    <div id="pageMask"></div>
+
+    <!-- This needs to go last for overlay content to have proper z-index in IE7 -->
+    <apex:insert name="overlayContent" />
+
+
+
+    <!-- Used to get CSS media query values for JS access -->
+    <div id="mediaWidth"></div>
+    <div id="mediaDeviceWidth"></div>
+
+
+
+    <script>
+        // Do this after everything is done
+        $Cloud.init();
+
+    </script>
+</body>
+</html>
+</apex:page>

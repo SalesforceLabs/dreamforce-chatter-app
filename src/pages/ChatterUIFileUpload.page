@@ -1,0 +1,120 @@
+<!--
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<apex:page standardController="ContentVersion" extensions="ChatterUIFileUpload" showHeader="false" standardStylesheets="false" sidebar="false">
+	<!-- minimal styles required for the file input from the reset and default stylesheets to avoid having to include them -->
+	<style type="text/css">
+	    /*
+		 * Addresses font-family inconsistency between 'textarea' and other form elements.
+		 */
+		html,
+		button,
+		input,
+		select,
+		textarea {
+		    font-family: sans-serif;
+		    color: #2a2a2a;
+		}
+		
+		/*
+		 * See Eric Meyer on unitless line-heights:
+		 * http://meyerweb.com/eric/thoughts/2006/02/08/unitless-line-heights/
+		 */
+		body {
+		    font-size: 1em;
+		    line-height: 1.4;
+		    background-color: transparent !important; /* for the iframe body */
+		}
+		
+		button,
+		input,
+		select,
+		textarea {
+		    font-size: 100%;
+		}
+		
+		input,
+		select,
+		textarea {
+		    color: #444;
+		    border: 1px solid #cacaca;
+		    /*-webkit-appearance: none;         /* Disables default iOS styles, like inner shadow */
+		}
+		
+		.ieLt9 .ieLt9-hide {
+			display: none;
+		}
+		
+		.ieLt9 .inputFile {
+			width: 250px;
+		}
+	</style>
+	<link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.css_app_chatterui)}"/>
+	
+	<!-- hide the form if upload was successful to prevent the iframe from blinking -->
+	<div class="form-upload desktop {!appSection} {!IF(imageOnly, 'imageOnly', '')} {!IF(isUploadSuccessful, 'display-none', '')}">
+		<apex:form enctype="multipart/form-data">
+		    <div class="input-placeholder-container ieLt9-hide">
+                <input type="text" class="input-placeholder radius-1 border-1" value="" />
+            </div>
+            <div class="button-browse ieLt9-hide"><a class="{!IF(imageOnly, 'cta bg-gradient-1', 'cta bg-gradient-3')}" href="#">{!IF(imageOnly, 'Upload Photo', 'Browse')}</a></div>
+                                                    
+            <div class="file-wrap">                                        
+		        <apex:inputFile value="{!contentVersion.VersionData}" fileName="{!contentVersion.Title}" id="file" 
+		              styleClass="inputFile file" size="35" onchange="top.ChatterUI.FileManager.showFilePaths(this, {!imageOnly}, '{!appSection}');" /> 
+		    </div>
+		    
+		    <!-- hidden textarea containing the selected file's path -->
+		    <apex:inputTextarea styleClass="filePath display-none" value="{!contentVersion.PathOnClient}" />
+		    <apex:actionFunction action="{!uploadAttachment}" name="uploadAttachment" />
+		    
+		    <apex:inputHidden value="{!successHandler}" id="successHandler" />
+		    <apex:inputHidden value="{!errorHandler}" id="errorHandler" />
+		    
+		    <script type="text/javascript">
+	            var successHandler = document.getElementById("{!$Component.successHandler}"),
+	                errorHandler = document.getElementById("{!$Component.errorHandler}");
+		    </script>
+	 	</apex:form>
+	</div>
+	
+	<script type="text/javascript">
+	   top.ChatterUI.FileManager.processUploadResult(
+	       { 
+	           status: '{!JSENCODE(status)}',
+	           message: '{!JSENCODE(message)}', 
+	           fileId: '{!JSENCODE(fileId)}' 
+	       }, 
+	       successHandler.value,
+	       errorHandler.value
+	   );
+	   
+	   if (top.ChatterUI.env.isIELt9()) {
+	   		document.documentElement.className += ' ieLt9';
+	   }
+	</script>
+</apex:page>

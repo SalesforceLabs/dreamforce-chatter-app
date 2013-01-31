@@ -1,0 +1,101 @@
+<!--
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+<apex:page controller="ChatterUIController" action="{!init}" docType="html-5.0" standardStylesheets="false" sidebar="false" showHeader="false">
+    <apex:composition template="Template">
+        <apex:define name="pageTitle">{!$Label.page_title_chatter_feed}</apex:define>
+
+        <apex:define name="headSection">
+                <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_app_chatterui)}"/>
+                <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_app_chatterui_profile)}"/>
+                <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_app_chatterui_people)}"/>
+                <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_app_chatterui_groups)}"/>
+
+                <script src="{! URLFOR($Resource.js_plugins_jqueryHashChange_min)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_templates)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_profile_templates)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_groups_templates)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_people_templates)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_chatterpage)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_filemanager)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_profilebuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_feedbuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_feeditembuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_postbuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_peoplelistbuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_searchmanager)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_groupbuilder)}"></script>
+                <script src="{! URLFOR($Resource.js_app_chatterui_service)}"></script>
+
+            <!--[if lt IE 9]>
+                <link rel="stylesheet" type="text/css" href="{! URLFOR($Resource.css_app_chatterui_iefixes)}"/>
+            <![endif]-->
+        </apex:define>
+
+        <apex:define name="sidebar">
+            <c:Sidebar />
+        </apex:define>
+
+        <apex:define name="panels">
+            <div class="panels" id="panels">
+                <div class="panelHeaderBar fixedBar">
+                    <div class="bLeft"></div>
+                    <div class="bRight">
+                        <a href="javascript:void(0);" id="refreshButton" class="refreshButton iconButton" title="{!$Label.refresh}"><span class="visuallyhidden">{!$Label.refresh}</span></a>
+                    </div>
+                    <div class="bBody">
+                        <h3 class="flush truncate">{!$Label.page_title_chatter_feed}</h3>
+                    </div>
+                </div>
+                <div class="uiScroller forceScroller" id="panelScroller" data-scroller='{"enableRefresh":"true"}'>
+                    <div id="pullDown" class="padGridEqSides padHalfBottom">
+                        <span class="pullDownIcon"></span><span class="pullDownLabel">{!$Label.pull_to_refresh_text}</span>
+                    </div>
+                    <div class="chatter-page clearfix"></div>
+                    <script type="text/javascript">
+                        ChatterUI.UserContext = {
+                            userId: '{!$User.Id}',
+                            sessionId: '{!GETSESSIONID()}',
+                            usingMobile: {!usingMobile},
+                            userObjectPrefix: '{!userObjectPrefix}',
+                            feedObjectPrefix: '{!feedObjectPrefix}'
+                        }
+
+                    </script>
+                </div> <!-- end .uiScroller -->
+                <div class="areaMask" id="loadingMask">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </apex:define>
+
+        <apex:define name="overlayContent">
+            <div id="overlayContent"></div>
+        </apex:define>
+    </apex:composition>
+</apex:page>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <customSettingsVisibility>Protected</customSettingsVisibility>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Disabled__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>A flag that indicates if the element is disabled.</description>
+        <externalId>false</externalId>
+        <label>Disabled</label>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DisplayOrder__c</fullName>
+        <description>The order of the element in the flow.</description>
+        <externalId>false</externalId>
+        <label>DisplayOrder</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PageFilterUrl__c</fullName>
+        <description>The Page URL to filter by. It is part of the key to search flows by.</description>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>PageName__c</fullName>
+        <description>The display name for the Page.</description>
+        <externalId>false</externalId>
+        <label>PageName</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sprite_XY_Hover__c</fullName>
+        <description>The background-position value of the HOVER STATE image location on the sprite.</description>
+        <externalId>false</externalId>
+        <label>Sprite XY - Hover</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sprite_XY_Pressed__c</fullName>
+        <description>The background-position value of the PRESSED STATE image location on the sprite.</description>
+        <externalId>false</externalId>
+        <label>Sprite XY - Pressed</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sprite_XY_Resting__c</fullName>
+        <description>The background-position value of the RESTING STATE image location on the sprite.</description>
+        <externalId>false</externalId>
+        <label>Sprite XY - Resting</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Url__c</fullName>
+        <externalId>false</externalId>
+        <label>Url</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>NavigationElement</label>
+</CustomObject>

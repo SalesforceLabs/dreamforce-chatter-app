@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>text/css</contentType>
+    <description>CSS for pages that are primarily panel content area only. This would be used on various landing pages perhaps.</description>
+</StaticResource>

@@ -1,0 +1,54 @@
+<apex:component >
+
+    <!-- requires jquery -->
+
+    <apex:attribute name="additionalCssClass" type="String" description="A space-separated list of any additional CSS classes desired on the container element."/>
+    <apex:attribute name="containerId" type="String" description="The id attribute of the container element."/>
+    <apex:attribute name="menuItems" type="BasicMenuItem[]" description="List of BasicMenuItem elements."/>
+    <apex:attribute name="toggleId" type="String" description="The id attribute of the <a> tag (toggles menu open/closed)."/>
+    <apex:attribute name="menuTitle" type="String" description="The title attribute of the <a> tag, as well as the visible title of the menu."/>
+    <apex:attribute name="menuTitleContents" type="String" description="Determines what portions of the menu title should be displayed. Valid values are 'image', 'text' (default), or 'both'." default="text"/>
+    <apex:attribute name="imageUrl" type="String" description="The src attribute of the <img> tag."/>
+    <apex:attribute name="additionalImageCssClass" type="String" description="The class attribute of the <img> tag."/>
+    <apex:attribute name="imageAltText" type="String" description="The alt attribute of the <img> tag."/>
+    <apex:attribute name="align" type="String" description="The edge to which the menu items should align. Valid values are 'right' and 'left' (default)." default="left"/>
+
+    <div class="basicMenu {!additionalCssClass}" id="{!containerId}">
+        <a href="javascript:void(0);" class="basicMenuToggle" id="{!toggleId}" title="{!menuTitle}">
+            <apex:outputPanel layout="none" rendered="{!OR(menuTitleContents == 'image', menuTitleContents == 'both')}">
+                <img src="{!imageUrl}" class="basicMenuImage {!additionalImageCssClass}" alt="{!imageAltText}"/>
+            </apex:outputPanel>
+            <apex:outputPanel layout="none" rendered="{!OR(menuTitleContents == 'text', menuTitleContents == 'both')}">
+                <span class="basicMenuTitle{!IF(menuTitleContents == 'text', ' basicMenuTitleTextOnly', '')}">{!menuTitle}</span>
+            </apex:outputPanel>
+        </a>
+        <ul class="basicMenuOptions{!IF(align == 'right', ' alignRight', '')}">
+            <apex:repeat value="{!menuItems}" var="umi">
+                <li class="basicMenuOption"><a href="{!IF(umi.isActionable, umi.url, 'javascript:void(0);')}" class="basicMenuLink {!umi.cssClass}">{!umi.label}</a></li>
+            </apex:repeat>
+        </ul>
+    </div>
+
+    <script>
+        var $basicMenu{!containerId} = $('#{!containerId}');
+        /* BLECH ... this is awful, but not sure what the css issue is here on just chatter pages */
+        if (window.location.href.toLowerCase().indexOf('/chatter') > -1) {
+            $basicMenu{!containerId}.addClass('chatterPage');
+        }
+        $('#{!toggleId}').on('click', function (event) {
+            $basicMenu{!containerId}.toggleClass('menuOpen');
+            event.stopPropagation();
+        });
+        $basicMenu{!containerId}.find('.basicMenuLink').on('click', function (event) {
+            $basicMenu{!containerId}.removeClass('menuOpen');
+            event.stopPropagation();
+        });
+        $('#{!toggleId}').on('mousedown', function (event) {
+            event.stopPropagation();
+        });
+        $basicMenu{!containerId}.find('.basicMenuLink').on('mousedown', function (event) {
+            event.stopPropagation();
+        });
+    </script>
+
+</apex:component>

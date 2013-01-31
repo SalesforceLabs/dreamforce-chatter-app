@@ -1,0 +1,51 @@
+<apex:component >
+
+    <!-- very handy for accessing image urls from static resources stored internally and putting them on a page -->
+
+    <apex:attribute name="cssSelector" 
+        type="String" 
+        description="The CSS selector that the rule will use." 
+        required="true"
+    />
+    <apex:attribute name="imageURL" 
+        type="String" 
+        description="The URL that will be used as the value of the background-image property." 
+        required="true"
+    />
+    <apex:attribute name="backgroundColor" 
+        type="String" 
+        description="The value of the background-color property. Defaults to 'transparent'." 
+        default="transparent"
+    />
+    <apex:attribute name="xCoordinate" 
+        type="String" 
+        description="The value of the 'x' portion of the background-position property. Defaults to 'left'." 
+        default="left"
+    />
+    <apex:attribute name="yCoordinate" 
+        type="String" 
+        description="The value of the 'y' portion of the background-position property. Defaults to 'top'." 
+        default="top"
+    />
+    <apex:attribute name="repeat" 
+        type="String" 
+        description="The value of the background-repeat property. Defaults to 'no-repeat'." 
+        default="no-repeat"
+    />
+    <apex:attribute name="isRetina" 
+        type="boolean" 
+        description="Specifies if this rule is going to be used on high-resolution devices (adds the appropriate @media query)" 
+        default="false"
+    />
+
+    <style>
+        <apex:outputPanel layout="none" rendered="{!isRetina}">
+            @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+            only screen and (min--moz-device-pixel-ratio: 1.5),
+            only screen and (min-resolution: 240dpi) {
+        </apex:outputPanel>
+        {!cssSelector}{background:{!backgroundColor} url("{!imageURL}") {!xCoordinate} {!yCoordinate} {!repeat};}
+        <apex:outputPanel layout="none" rendered="{!isRetina}">}</apex:outputPanel>
+    </style>
+
+</apex:component>

@@ -1,0 +1,48 @@
+<apex:component controller="TemplateController">
+
+    <apex:attribute name="displayAsMenu" 
+        type="boolean" 
+        description="Indicates if this component should be displayed as a highly styled menu element (resembling a <select> element in function), 
+            rather than a standard <ul> element in the sidebar." 
+        default="false"
+    />
+
+    <!-- *** DISPLAY AS A SIDEBAR *** -->
+
+    <apex:outputPanel layout="none" rendered="{!!displayAsMenu}">
+
+        <div class="uiScroller" id="sideBarScroller">
+            <!--
+                ie7 can't have any line breaks (i.e., \n) in page source between each <li> tag, or it adds 
+                a text node in the DOM, which screws up the spacing. have to put <ul><apex:repeat><li> all 
+                on the same line here.
+            -->
+            <ul class="sidebarRegList"><apex:repeat value="{!sidebarItems}" var="item"><li>
+                        <apex:outputPanel layout="none" rendered="{!item.current}">
+                            <a class="current">{!item.text}</a>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{! !item.current && item.accessible}">
+                            <a class="editable completed" href="{!item.url}" title="{!item.text}">{!item.text}</a>
+                        </apex:outputPanel>
+                        <apex:outputPanel layout="none" rendered="{! !item.current && !item.accessible}">
+                            <a class="uneditable">{!item.text}</a>
+                        </apex:outputPanel></li></apex:repeat></ul>
+        </div>
+
+    </apex:outputPanel>
+
+    <!-- *** DISPLAY AS A MENU *** -->
+
+    <apex:outputPanel layout="none" rendered="{!displayAsMenu}">
+
+        <c:BasicMenu containerId="appSubNav"
+            additionalCssClass="showOnSideBarHide"
+            menuItems="{!sidebarItemsAsMenu}"
+            toggleId="appSubNavToggle"
+            menuTitle="{!currentTopNavItemName}"
+            menuTitleContents="text"
+        />
+
+    </apex:outputPanel>
+
+</apex:component>

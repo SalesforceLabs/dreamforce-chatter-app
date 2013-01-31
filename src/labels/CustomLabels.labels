@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ERROR_generic_contentload_failure</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error message for when AJAX content fails to load</shortDescription>
+        <value>Unable to retrieve content.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_generic_image_unavailable</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Error message for when image content fails to load</shortDescription>
+        <value>Image unavailable.</value>
+    </labels>
+    <labels>
+        <fullName>ERROR_generic_request_failure</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Generic error message for request failures</shortDescription>
+        <value>Unable to process request.</value>
+    </labels>
+    <labels>
+        <fullName>button_cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Button cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>close</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>close button</shortDescription>
+        <value>Close</value>
+    </labels>
+    <labels>
+        <fullName>modal_info_heading</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Heading text for information dialogs</shortDescription>
+        <value>Information:</value>
+    </labels>
+    <labels>
+        <fullName>page_title_chatter_feed</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Page title for the Chatter page</shortDescription>
+        <value>My Chatter</value>
+    </labels>
+    <labels>
+        <fullName>pull_to_refresh_loading_text</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Display text when loading data via pull to refresh</shortDescription>
+        <value>Loading...</value>
+    </labels>
+    <labels>
+        <fullName>pull_to_refresh_release_text</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Display text for pull to refresh release state</shortDescription>
+        <value>Release to refresh...</value>
+    </labels>
+    <labels>
+        <fullName>pull_to_refresh_text</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Display text for pull to refresh</shortDescription>
+        <value>Pull down to refresh...</value>
+    </labels>
+    <labels>
+        <fullName>refresh</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Refresh</shortDescription>
+        <value>Refresh</value>
+    </labels>
+    <labels>
+        <fullName>toolbar_app_top_nav_lbl_title_text</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Text for the link in the upper left corner</shortDescription>
+        <value>My chatter app</value>
+    </labels>
+</CustomLabels>

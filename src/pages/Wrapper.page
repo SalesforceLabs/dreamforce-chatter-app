@@ -1,0 +1,118 @@
+<!--
+Copyright (c) 2011, salesforce.com, Inc.
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+    * Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+    * Neither the name of the salesforce.com, Inc. nor the names of its contributors
+    may be used to endorse or promote products derived from this software
+    without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<apex:page standardStylesheets="false" controller="TemplateController" sidebar="false" showHeader="false" cache="true">
+    <div class="wrapper uiBlock hideNav" id="wrapper">
+        <div class="toolbar clearfix"> <!-- This is inside .wrapper to make it easier to sync the animation with #appBody -->
+
+            <c:BackgroundImageStyleRule cssSelector=".basicMenu" 
+                imageURL="{!URLFOR($Resource.media_icons_png_select_arrow)}" 
+                xCoordinate="right" 
+                yCoordinate="50%" 
+                backgroundColor="#256F9E"
+            />
+
+            <c:BackgroundImageStyleRule cssSelector=".basicMenu.menuOpen" 
+                imageURL="{!URLFOR($Resource.media_icons_png_select_arrow_active)}" 
+                xCoordinate="right" 
+                yCoordinate="50%" 
+                backgroundColor="#FFF"
+            />
+
+            <!--
+                we can't use <span> tags in place of <a> tags here because they don't accept browser focus, so a user would not 
+                be able to tab through the application and expand the main nav menu using a keyboard, nor will any assistive 
+                technology be able to see any nav links. so we should use <button> and <select> tags instead.
+            -->
+
+            <!--primary and secondary nav -->
+            <apex:outputPanel layout="block" styleClass="bLeft toggleListBar canToggleNav" id="toggleListBar">
+
+                <!-- element #1 (toggles display of all nav menu items): always visible -->
+                <button id="toggleNav" class="toolbarButton toggleNav" title="{!$Label.toolbar_app_top_nav_lbl_title_text}">
+                    <img class="toggleNavIcon" src="{! URLFOR($Resource.media_image_util_gif_blank)}" alt="Show / Hide Navigation Menu" />
+                    <!--
+                        this is embarrassing, but ie7 makes us do embarrassing stuff ... see associated CSS rule (#ie7ToggleNavIcon) for explanation
+                    -->
+                    <div class="toggleNavIcon" id="ie7ToggleNavIcon" alt="Show / Hide Navigation"></div>
+                    <div class="toggleNavCurrentSelection hideOnSideBarHide">{!CurrentTopNavItemName}</div>
+                </button>
+
+                <!-- element #2 (menu for sub navigation): only visible when width of form factor is small (e.g., phone, tablet (in portrait mode)) -->
+                <c:Sidebar displayAsMenu="true"/>
+
+            </apex:outputPanel>
+
+
+            <!-- Tools/options/help area -->
+             <apex:outputPanel layout="block" styleClass="bRight utilityBar" id="utilityBar">
+
+                <!-- element #3: phonegap barcode scanner -->
+                <button id="qrReader" class="toolbarButton phonegapFeature phonegapHidden"></button>
+
+                <!-- element #4 (user menu): always visible -->
+                <c:BasicMenu additionalCssClass="userMenu"
+                    containerId="userMenu"
+                    menuItems="{!userMenuItems}"
+                    toggleId="userMenuToggle"
+                    menuTitle="{!userFullName}"
+                    menuTitleContents="image"
+                    imageUrl="{!avatarUrl}"
+                    additionalImageCssClass="{!avatarCssClass}"
+                    imageAltText="{!userFullName}"
+                    align="right"
+                />
+
+            </apex:outputPanel>
+
+
+            <apex:outputPanel layout="block" styleClass="bBody toolbarHeader canToggleNav" id="toolbarHeader">
+                <img src="{!URLFOR($Resource.company_logo)}" alt="" class="logo"/>
+            </apex:outputPanel>
+
+        </div> <!-- end .toolbar -->
+
+
+        <div class="relative appBody" id="appBody">
+            <div class="bLeft">
+                <apex:outputPanel layout="block" styleClass="sidebar" id="sidebar">
+                    <apex:insert name="sidebar"/>
+                </apex:outputPanel>
+            </div>
+            <div class="bRight"></div>
+            <div class="bBody main" role="main">
+                <apex:outputPanel layout="block" styleClass="content" id="content">
+                    <apex:insert name="panels"/>
+                      <apex:composition template="Footer"></apex:composition> 
+                 </apex:outputPanel>
+                 <div class="sidebarMask"></div> <!-- This masks the content when the nav menu is dropped open -->
+            </div>
+
+        </div> <!-- end #appBody -->
+    </div>
+</apex:page>

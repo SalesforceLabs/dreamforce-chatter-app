@@ -1,0 +1,25 @@
+/**!
+ * css_grids.css
+ *
+ * Using the OOCSS grid: https://github.com/stubbornella/oocss/wiki/Grids
+ */
+
+
+.line,.lastUnit{overflow:hidden; *overflow:visible;*zoom:1;}
+.unit{float:left;}
+.unitRight{float:right;}
+.size1of1{float:none;}
+.size1of2{width:50%;}
+.size1of3{width:33.33333%;}
+.size2of3{width:66.66666%;}
+.size1of4{width:25%;}
+.size3of4{width:75%;}
+.size1of5{width:20%;}
+.size2of5{width:40%;}
+.size3of5{width:60%;}
+.size4of5{width:80%;}
+.size1of10{width:10%;}
+.size1of8{width:12.5%;}
+.size1of7{width:15%;} /* approximately...c'mon */
+.size3of7{width:45%;}
+.lastUnit{float:none;width:auto;_position:relative;_left:-3px;_margin-right:-3px;}
