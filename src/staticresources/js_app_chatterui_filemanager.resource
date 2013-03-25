@@ -542,7 +542,7 @@ ChatterUI.FileManager = (function($) {
     }
 
     function getFileExtension(fileName) {
-        if (fileName.indexOf('.') == -1) {
+        if (typeof fileName == 'undefined' || fileName.indexOf('.') == -1) {
             // no extension
             return '';
         }
